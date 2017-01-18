@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0">
+    <title>海尔团购会</title>
+    <style>
+      img {
+        width: 400px;
+      }
+      #text-canvas {
+        width: 400px;
+        height: 300px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="http://ogm89ro58.bkt.clouddn.com/image/wuhan_002.jpg">
+    <canvas id="text-canvas" width="400" height="300"></canvas>
+    <script src="../index.js"></script>
+    <script>
+    var canvas = document.getElementById('text-canvas')
+    var context = canvas.getContext('2d')
+    var width = 400
+    var height = 300
+
+    function drawText (text, x, y, width) {
+
+      context.font = '100px Verdana'
+      context.fillText(text, x || 0, y || 0, width)
+    }
+
+    function drawGrid (w, h) {
+      var x = 0
+      var y = 0
+      while (x < width) {
+        drawLine({x: x, y: 0}, {x: x, y: height})
+        x += w
+      }
+      while (y < height) {
+        drawLine({x: 0, y: y}, {x: width, y: y})
+        y += h
+      }
+    }
+
+    function drawLine (from, to) {
+      context.beginPath()
+      context.lineWidth = 1
+      context.moveTo(from.x, from.y)
+      context.lineTo(to.x, to.y)
+      context.stroke()
+    }
+
+    drawText('ABC', 0, 100)
+    </script>
+  </body>
+</html>

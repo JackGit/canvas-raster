@@ -20,6 +20,10 @@
 
     _init: function () {
 
+    },
+
+    raster: function () {
+      
     }
   }
 
