@@ -23,8 +23,12 @@
     },
 
     raster: function () {
-      
+
     }
+  }
+
+  function getAverageColor (imageData) {
+    // 
   }
 
   function loadImage (imageUrl, callback) {
