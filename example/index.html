@@ -4,31 +4,51 @@
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0">
-    <title>海尔团购会</title>
+    <title>Canvas Raster</title>
     <style>
       img {
         width: 400px;
       }
       #text-canvas {
-        width: 400px;
-        height: 300px;
+        width: 800px;
+        height: 400px;
         border: 1px solid black;
       }
     </style>
   </head>
   <body>
-    <img src="http://ogm89ro58.bkt.clouddn.com/image/wuhan_002.jpg">
-    <canvas id="text-canvas" width="400" height="300"></canvas>
+    <img id="img" src="http://ogm89ro58.bkt.clouddn.com/image/google_2015_logo_detail.png" crossOrigin="anonymous">
+    <canvas id="text-canvas" width="800" height="400"></canvas>
     <script src="../index.js"></script>
     <script>
     var canvas = document.getElementById('text-canvas')
     var context = canvas.getContext('2d')
-    var width = 400
-    var height = 300
+    var img = document.getElementById('img')
+    var width = 800
+    var height = 400
+    var cr = null
+
+
+
+    function test () {
+      cr = new CanvasRaster()
+      cr.canvas = canvas
+      cr.context = context
+      cr._createCells()
+      cr.cells.forEach(function (cell) {
+        drawRect(context, cell.x, cell.y, cr.options.cellSize[0], cr.options.cellSize[1], cell.color)
+      })
+    }
+
+    function drawRect (ctx, x, y, w, h, color) {
+      ctx.fillStyle = color
+      ctx.fillRect(x, y, w, h)
+    }
 
     function drawText (text, x, y, width) {
 
-      context.font = '100px Verdana'
+      context.font = '100px arial'
+      context.fillStyle = 'red'
       context.fillText(text, x || 0, y || 0, width)
     }
 
@@ -53,7 +73,8 @@
       context.stroke()
     }
 
-    drawText('ABC', 0, 100)
+    context.drawImage(img, 0, 0, 800, 400)
+    //drawText('LOGO', 100, 100)
     </script>
   </body>
 </html>
